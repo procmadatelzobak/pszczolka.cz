@@ -1,0 +1,277 @@
+/* === pszczolka.cz === */
+
+:root {
+    --bg-primary:      #0a0a0f;
+    --bg-secondary:    #12121a;
+    --text-primary:    #c8b88a;
+    --text-dim:        #6b6150;
+    --accent-gold:     #d4a843;
+    --accent-neon:     #00ff9f;
+    --accent-neon-alt: #ff2a6d;
+    --glow:            rgba(212, 168, 67, 0.3);
+}
+
+/* --- Reset & Base --- */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 4rem 1.5rem 3rem;
+}
+
+/* --- Noise Overlay --- */
+
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url('noise.svg') repeat;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* --- Scanlines --- */
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* --- Stage --- */
+
+#stage {
+    max-width: 650px;
+    width: 100%;
+}
+
+/* --- Text Output --- */
+
+#text-output {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    min-height: 4rem;
+    font-size: 1rem;
+}
+
+#text-output .line-terminal {
+    color: var(--accent-neon);
+    font-size: 0.9rem;
+}
+
+#text-output .line-name {
+    color: var(--accent-gold);
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+}
+
+/* --- Cursor --- */
+
+#cursor {
+    display: inline;
+    color: var(--accent-gold);
+    animation: blink 1s step-end infinite;
+    font-size: 1rem;
+}
+
+#cursor.hidden {
+    display: none;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* --- Choices --- */
+
+#choices {
+    margin-top: 2rem;
+}
+
+.choice {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: 1px solid var(--text-dim);
+    border-radius: 2px;
+    color: var(--accent-gold);
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 0.7rem 1.1rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeIn 600ms forwards;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.choice:hover,
+.choice:focus-visible {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 15px var(--glow);
+    animation: glitch 0.15s;
+}
+
+.choice:focus-visible {
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 2px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- External Links --- */
+
+#links {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+}
+
+#links a {
+    color: var(--accent-gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--text-dim);
+    font-size: 0.9rem;
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+    opacity: 0;
+    animation: fadeIn 600ms forwards;
+}
+
+#links a:hover,
+#links a:focus-visible {
+    border-color: var(--accent-gold);
+    text-shadow: 0 0 8px var(--glow);
+}
+
+/* --- Language Toggle --- */
+
+#lang-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: 1px solid var(--text-dim);
+    border-radius: 2px;
+    color: var(--text-dim);
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.6rem;
+    cursor: pointer;
+    z-index: 100;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+#lang-toggle:hover {
+    color: var(--accent-gold);
+    border-color: var(--accent-gold);
+}
+
+/* --- Headings (used in noscript) --- */
+
+h1, h2, h3 {
+    font-family: 'Cinzel', 'Cormorant Garamond', serif;
+    color: var(--accent-gold);
+    font-weight: 400;
+}
+
+/* --- Glitch --- */
+
+@keyframes glitch {
+    0%   { transform: translate(0); }
+    20%  { transform: translate(-2px, 2px); }
+    40%  { transform: translate(2px, -1px);
+           text-shadow: -2px 0 var(--accent-neon), 2px 0 var(--accent-neon-alt); }
+    60%  { transform: translate(-1px, 1px); }
+    80%  { transform: translate(1px, -2px);
+           text-shadow: 2px 0 var(--accent-neon), -2px 0 var(--accent-neon-alt); }
+    100% { transform: translate(0); text-shadow: none; }
+}
+
+.glitch-active {
+    animation: glitch 0.3s linear;
+}
+
+/* --- Reduced Motion --- */
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    #cursor { display: none; }
+    .choice { opacity: 1; }
+    #links a { opacity: 1; }
+}
+
+/* --- Noscript Fallback --- */
+
+.noscript-content {
+    max-width: 650px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.noscript-content section {
+    margin-bottom: 3rem;
+    white-space: pre-wrap;
+}
+
+.noscript-content h2 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.noscript-content a {
+    color: var(--accent-gold);
+}
+
+/* --- Responsive --- */
+
+@media (max-width: 480px) {
+    body {
+        padding: 3rem 1rem 2rem;
+    }
+
+    #text-output {
+        font-size: 0.92rem;
+    }
+
+    .choice {
+        font-size: 0.88rem;
+        padding: 0.6rem 0.9rem;
+    }
+}
