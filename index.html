@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vojtěch Pszczólka — Deník</title>
+    <meta name="description" content="Osobní web Vojtěcha Pszczólky. AI, technologie, zážitkové hry, systémové myšlení.">
+
+    <!-- OG Meta -->
+    <meta property="og:title" content="Vojtěch Pszczólka">
+    <meta property="og:description" content="Deník na rozhraní magie a technologie.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pszczolka.cz">
+    <meta property="og:locale" content="cs_CZ">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <button id="lang-toggle" aria-label="Přepnout jazyk">CZ | EN</button>
+
+    <div id="stage">
+        <div id="text-output" aria-live="polite" role="log"></div>
+        <span id="cursor" class="hidden">█</span>
+        <div id="choices" role="group" aria-label="Volby"></div>
+        <div id="links"></div>
+    </div>
+
+    <noscript>
+        <div class="noscript-content">
+            <h1>Vojtěch Pszczólka</h1>
+
+            <section>
+                <h2>O mně</h2>
+Vojtěch Pszczólka. Třicet čtyři. Praha.
+
+Chtěl jsem být jaderný fyzik. Skončil jsem v IT.
+Ne proto, že bych miloval servery — proto, že miluju
+propojovat věci. Sítě, systémy, lidi, příběhy.
+
+Deset let v IT — infrastruktura, bezpečnost, cloud,
+automatizace. Poslední dva roky stavím s AI. 30+ projektů za rok.
+
+A vedle toho navrhuji zážitkové hry. Detektivky,
+středověké hostiny, světy, do kterých vstoupíš
+a na chvíli zapomeneš, kdo jsi.
+            </section>
+
+            <section>
+                <h2>Projekty</h2>
+ChatMystery — detektivní hra, kde vyslýcháš AI (game.chatmystery.com)
+Vševěd — kvízová aplikace s AI generováním otázek
+sinuhetcloud — vlastní cloudová infrastruktura
+            </section>
+
+            <section>
+                <h2>Teambuilding</h2>
+Zážitkové akce pro firmy. Detektivní večery. Hry na míru.
+LARP pro lidi, kteří nikdy neslyšeli slovo LARP.
+            </section>
+
+            <section>
+                <h2>Kontakt</h2>
+Email: <a href="mailto:vojtech@pszczolka.cz">vojtech@pszczolka.cz</a>
+GitHub: <a href="https://github.com/procmadatelzobak">procmadatelzobak</a>
+LinkedIn: <a href="https://linkedin.com/in/pszczolka">pszczolka</a>
+            </section>
+        </div>
+    </noscript>
+
+    <script src="content.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
